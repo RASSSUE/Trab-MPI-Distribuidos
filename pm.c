@@ -1,52 +1,39 @@
 #include <stdio.h>
 #include <stdlib.h>
-#define NUM 1000
+#define NUM 2000
 
 int main()
 {
+  
+  // criando e inicializando as matrizes 1, 2 e 3 (a matriz 3 inicializada com zeros):
 
-  int **m1,**m2,**m3, i, j, k;
-  m1= calloc(NUM, sizeof(int *));
-  m2= calloc(NUM, sizeof(int *));
-  m3= calloc(NUM, sizeof(int *));
+  long double **m1,**m2,**m3;
+  int i, j, k;
+  m1= malloc(NUM * sizeof(long double *));
+  m2= malloc(NUM * sizeof(long double *));
+  m3= malloc(NUM * sizeof(long double *));
 
-  for(i=0; i<NUM; i++){
-    m1[i] = calloc(NUM, sizeof(int));
+  for(i=0;i<NUM;i++){
+    m1[i] = malloc(NUM * sizeof(long double));
   }
-  for(i=0; i<NUM; i++){
-    m2[i] = calloc(NUM, sizeof(int));
+  for(i=0;i<NUM;i++){
+    m2[i] = malloc(NUM * sizeof(long double));
   }
-  for(i=0; i<NUM; i++){
-    m3[i] = calloc(NUM, sizeof(int));
+  for(i=0;i<NUM;i++){
+    m3[i] = calloc(NUM,sizeof(long double));
   }
 
-  printf("Digite os valores da matriz\n");
+  // inicializando os valores da matriz 1 e 2 (utilizando os valores dos índices)
 
   for(i = 0; i<NUM; i++){
-    for(j=0; j<NUM; j++){
-      m1[i][j]=1;
-      m2[i][j]=1;
-      m3[i][j]=0;
+    for(j = 0; j<NUM; j++){
+      m1[i][j]=i;
+      m2[i][j]=j;
     }
   }
-  printf("Matriz 1\n");
 
-  for(i = 0; i<NUM; i++){
-    for(j=0; j<NUM; j++){
-      printf("%d, ", m1[i][j]);
-    }
-    printf("\n");
-  }
-  printf("Matriz 2\n");
+  // multiplicando matrizes 1 e 2, salvando resultado na matriz 3
 
-  for(i = 0; i<NUM; i++){
-    for(j=0; j<NUM; j++){
-      printf("%d, ", m2[i][j]);
-    }
-    printf("\n");
-  }
-
-  //desalocando mem ́oria usada
   for(i=0;i<NUM;i++){
     for(j=0;j<NUM;j++){
       for(k=0;k<NUM;k++){
@@ -54,14 +41,8 @@ int main()
        }
     }
   }
-  printf("Matriz 3\n");
 
-  for(i = 0; i<NUM; i++){
-    for(j=0; j<NUM; j++){
-      printf("%d, ", m3[i][j]);
-    }
-    printf("\n");
-  }
+  // desalocando memória das matrizes:
 
   for(i=0; i<NUM; i++){
     free(m1[i]);
@@ -76,4 +57,5 @@ int main()
   free(m2);
   free(m3);
 
+  return 0;
 }
