@@ -18,6 +18,19 @@
 #define MX_TYPE long double // tipo dos elementos da matriz
 #define ID_TYPE long int // tipo dos índices da matriz
 
+/*
+    int equalmxs(MX_TYPE **mx, MX_TYPE *mx_1d)
+
+    descrição:  essa função verifica se as matrizes são iguais,
+                e pode ser utilizada para checar o resultado sem a
+                necessidade de exibir a matriz
+
+    **mx        ponteiro para a matriz 2D
+    *mx_1d      ponteiro para a matriz 1D
+
+    retorno:    retorna 1 para matrizes iguais, 0 caso contrário
+
+*/
 int equalmxs(MX_TYPE **mx, MX_TYPE *mx_1d){
     ID_TYPE i,j;
     for(i=0;i<NUM;i++){
@@ -28,7 +41,13 @@ int equalmxs(MX_TYPE **mx, MX_TYPE *mx_1d){
     return 1;
 }
 int main(void){
-    // mx1 matriz convencional,     mx1_1d matriz de 1 Dim.
+    /*
+        mx1         matriz convencional (2D)
+        mx1_1d      matriz 1D
+    */
+    
+    // criando as matrizes
+
     MX_TYPE **mx1 = malloc(NUM * sizeof(MX_TYPE *));
     ID_TYPE i,j;
     for(i=0;i<NUM;i++){
@@ -36,11 +55,18 @@ int main(void){
     }
 
     MX_TYPE *mx1_1d = malloc(NUM * NUM * sizeof(MX_TYPE));
+
+    // inicializando matriz 1D
+
     for(i=0;i<NUM;i++){
         for(j=0;j<NUM;j++){
             mx1_1d[3*i+j]=3*i+j;
         }
     }
+
+    // copiando matriz 1D para matriz 2D e exibindo
+    // o resultado
+
     for(i=0;i<NUM;i++){
         for(j=0;j<NUM;j++){
             mx1[i][j]=mx1_1d[3*i+j];
@@ -49,6 +75,8 @@ int main(void){
         printf("\n");
     }
 
+    // liberando memória
+    
     for(i=0;i<NUM;i++){
         free(mx1[i]);
     }
